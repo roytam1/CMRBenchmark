@@ -17,6 +17,11 @@ int main(int argc, char** argv)
 	int testThreads = -1;
 	int score = 0;
 
+	SYSTEM_INFO sysinfo;
+	GetSystemInfo(&sysinfo);
+	int numCPU = sysinfo.dwNumberOfProcessors;
+	//printf("numCPU = %d\n", numCPU);
+
 	//LPSTR* argv = CommandLineToArgvA(GetCommandLineA(), &argc);
 
 	if (argc == 3)
@@ -27,7 +32,7 @@ int main(int argc, char** argv)
 	else
 	{
 		testNo = 4;
-		testThreads = 32;
+		testThreads = numCPU;
 	}
 
 	if (testNo == -1 || testThreads == -1)
