@@ -1,7 +1,8 @@
 
 #include "Benchmark.h"
 
-#include <iostream>
+//#include <iostream>
+#include <stdio.h>
 #include <process.h>
 #include <mmsystem.h>
 #pragma comment(lib,"winmm.lib")
@@ -9,19 +10,19 @@
 volatile int FlagLoop;
 unsigned int (__stdcall *FUNC)(void*);
 
-int main()
+int main(int argc, char** argv)
 {
-	int argc = 0;
+	//int argc = 0;
 	int testNo = -1;
 	int testThreads = -1;
 	int score = 0;
 
-	LPWSTR* argv = CommandLineToArgvW(GetCommandLineW(), &argc);
+	//LPSTR* argv = CommandLineToArgvA(GetCommandLineA(), &argc);
 
 	if (argc == 3)
 	{
-		testNo = _wtoi(argv[1]);
-		testThreads = _wtoi(argv[2]);
+		testNo = atoi(argv[1]);
+		testThreads = atoi(argv[2]);
 	}
 	else
 	{
@@ -140,7 +141,7 @@ int benchmark(int testNo, int testThreads, void* exData, int* score)
 	wprintf(L"score=%d\n", (int)(result / totalTime));
 	*/
 
-	wprintf(L"%d\n", (int)(result / totalTime));
+	printf("%d\n", (int)(result / totalTime));
 
 	*score = (int)(result / totalTime);
 
