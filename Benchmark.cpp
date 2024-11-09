@@ -1,4 +1,4 @@
-﻿
+
 #include "Benchmark.h"
 
 #include <iostream>
@@ -55,9 +55,10 @@ int benchmark(int testNo, int testThreads, void* exData, int* score)
 {
 	double result = 0.0;
 	const int BenchTime = 10000;
+	int i;
 
 	_ThreadStruct* ThreadStruct = new _ThreadStruct[testThreads];
-	for (int i = 0; i < testThreads; i++) {
+	for (i = 0; i < testThreads; i++) {
 		ThreadStruct[i].ExData = (void*)exData;
 		ThreadStruct[i].result = 0.0;
 	}
@@ -86,7 +87,7 @@ int benchmark(int testNo, int testThreads, void* exData, int* score)
 	default: return -1;
 	}
 
-	for (int i = 0; i < testThreads; i++) {
+	for (i = 0; i < testThreads; i++) {
 		hThread[i] = (unsigned long*)_beginthreadex(NULL, 0, FUNC, (void*)&ThreadStruct[i], 0, NULL);
 	}
 
@@ -118,7 +119,7 @@ int benchmark(int testNo, int testThreads, void* exData, int* score)
 	// wsprintfW(str, L"%5.4f", totalTime);
 	// MessageBox(NULL, str, str,MB_OK);
 
-	for (int i = 0; i < testThreads; i++)
+	for (i = 0; i < testThreads; i++)
 	{
 	//	wprintf(L"%02d:%f\n", i, ThreadStruct[i].result);
 		result += ThreadStruct[i].result;
