@@ -71,6 +71,10 @@ int benchmark(int testNo, int testThreads, void* exData, int* score)
 
 	FlagLoop = TRUE;
 
+	// for DEBUG
+	printf("testNo = %d\n", testNo);
+	printf("testThreads = %d\n", testThreads);
+
 	// スタート時間の確認 //
 	StartTime = timeGetTime();
 	QueryPerformanceFrequency(&lFrequency);
@@ -135,13 +139,11 @@ int benchmark(int testNo, int testThreads, void* exData, int* score)
 	delete[] hThread;
 
 	// for DEBUG
-	/*
-	wprintf(L"result=%f\n", result);
-	wprintf(L"totalTime=%d\n", (int)(totalTime*1000));
-	wprintf(L"score=%d\n", (int)(result / totalTime));
-	*/
+	printf("result = %f\n", result);
+	printf("totalTime = %d ms\n", (int)(totalTime*1000));
+	printf("score = %d\n", (int)(result / totalTime));
 
-	printf("%d\n", (int)(result / totalTime));
+	//printf("%d\n", (int)(result / totalTime));
 
 	*score = (int)(result / totalTime);
 
