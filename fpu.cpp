@@ -90,7 +90,7 @@ unsigned int __stdcall RandMeanSS(void *thread)
 	int N = (int)ThreadStruct->ExData;
 
 	int i;
-	double x,s1,s2;
+	double x,s1,s2, s3;
 
 	double *d = new double[N];
 	static long holdrand = 1;
@@ -108,7 +108,9 @@ unsigned int __stdcall RandMeanSS(void *thread)
 			x = d[i-1];
 			x -= s1;
 			s1 += x / i;
-			s2 += (i - 1) * x * x / i;
+			s3 = (i - 1) * x;
+			s3 *= x / i;
+			s2 += s3;
 		}
 		s2 = sqrt(s2 / (N - 1));
 		count++;
