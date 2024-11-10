@@ -69,6 +69,7 @@ int benchmark(int testNo, int testThreads, void* exData, int* score)
 		ThreadStruct[i].result = 0.0;
 	}
 	HANDLE* hThread = new HANDLE[testThreads];
+	unsigned* hThreadID = new unsigned[testThreads];
 
 	LARGE_INTEGER lPre, lStart, lEnd, lFrequency;
 	DWORD StartTime = 0, EndTime = 0;
@@ -98,7 +99,7 @@ int benchmark(int testNo, int testThreads, void* exData, int* score)
 	}
 
 	for (i = 0; i < testThreads; i++) {
-		hThread[i] = (unsigned long*)_beginthreadex(NULL, 0, FUNC, (void*)&ThreadStruct[i], 0, NULL);
+		hThread[i] = (unsigned long*)_beginthreadex(NULL, 0, FUNC, (void*)&ThreadStruct[i], 0, &hThreadID[i]);
 	}
 
 	while (StartTime + BenchTime > timeGetTime()) {	Sleep(100); }
