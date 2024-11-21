@@ -23,19 +23,24 @@ int main(int argc, char** argv)
 	//printf("numCPU = %d\n", numCPU);
 
 	//LPSTR* argv = CommandLineToArgvA(GetCommandLineA(), &argc);
+	testThreads = numCPU;
 
-	if (argc == 3)
+	if (argc > 1)
 	{
 		testNo = atoi(argv[1]);
-		testThreads = atoi(argv[2]);
-	}
-	else
-	{
-		testNo = 4;
-		testThreads = numCPU;
 	}
 
-	if (testNo == -1 || testThreads == -1)
+	if (argc > 2)
+	{
+		testThreads = atoi(argv[2]);
+	}
+
+	if (testNo == -1)
+	{
+		testNo = 4;
+	}
+
+	if (testNo <= 0 || testThreads <= 0)
 	{
 		return -1;
 	}
