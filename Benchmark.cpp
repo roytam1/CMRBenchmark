@@ -100,6 +100,7 @@ int benchmark(int testNo, int testThreads, void* exData, int* score)
 
 	for (i = 0; i < testThreads; i++) {
 		hThread[i] = (unsigned long*)_beginthreadex(NULL, 0, FUNC, (void*)&ThreadStruct[i], 0, &hThreadID[i]);
+		SetThreadPriority(hThread[i], THREAD_PRIORITY_BELOW_NORMAL);
 	}
 
 	while (StartTime + BenchTime > timeGetTime()) {	Sleep(100); }
